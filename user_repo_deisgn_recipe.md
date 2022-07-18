@@ -213,14 +213,3 @@ end
 
 ## 8. Test-drive and implement the Repository class behaviour
 
-_After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour._
-
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
-
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy/databases&prefill_File=resources/repository_class_recipe_template.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy/databases&prefill_File=resources/repository_class_recipe_template.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy/databases&prefill_File=resources/repository_class_recipe_template.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy/databases&prefill_File=resources/repository_class_recipe_template.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy/databases&prefill_File=resources/repository_class_recipe_template.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
