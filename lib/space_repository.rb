@@ -1,0 +1,2 @@
+class SpaceRepository
+end
