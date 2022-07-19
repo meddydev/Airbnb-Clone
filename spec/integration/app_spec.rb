@@ -29,4 +29,15 @@ describe Application do
             expect(response.body).to include('<a href="/login"> I already have an account </a>')
         end
     end
+
+    context 'GET /login' do 
+        it 'returns 200 OK and the form to log in' do
+            response = get('/login')
+            expect(response.status).to eq(200)
+            expect(response.body).to include('<h1>Login to your account</h1>')
+            expect(response.body).to include('<form action="/login" method="POST">')
+            expect(response.body).to include('input type="text" name="email"')
+            expect(response.body).to include('input type="password" name="password"')
+        end
+    end
 end
