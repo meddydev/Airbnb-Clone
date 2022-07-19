@@ -17,8 +17,13 @@ class UserRepository
     params = [email]
 
     result_set = DatabaseConnection.exec_params(query, params)
-    record = result_set[0]
-    record_to_user_object(record)
+
+    if result_set.to_a.empty?
+      return nil
+    else
+      record = result_set[0]
+      record_to_user_object(record)
+    end
   end
 
   def create(user)
