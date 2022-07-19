@@ -40,4 +40,27 @@ describe Application do
             expect(response.body).to include('input type="password" name="password"')
         end
     end
+
+    context 'POST /signup' do
+      it "returns 200 OK and new user is created" do
+        response = post('/signup', name: "Meddy", email: "meddy@example.com", password: "medmed")
+        repo = UserRepository.new
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>You have successfully signed up for MakersBnB</h1>')
+        expect(response.body).to include('<a href="/login">Click here to Login!</a>')
+        expect(repo.all.last.email).to eq "meddy@example.com"
+        expect(repo.all.length).to eq 4
+      end
+
+      it "returns 200 OK and displays HTML error page if user signs up with email already in database" do
+        response = post('/signup', name: "name_1", email: "email1@example.com", password: "pass_1")
+        repo = UserRepository.new
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h2>The email you are trying to sign up with already has an account associated with it.</h2>')
+        expect(response.body).to include('<a href="/">Click here to go back to the homepage</a>')
+        expect(response.body).to include('<a href="/login">Click here if you would like to login</a>')
+        expect(repo.all.length).to eq 3
+      end
+    end
 end
