@@ -12,6 +12,8 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  enable :sessions
   
   get "/" do
     return erb(:index)
@@ -36,6 +38,25 @@ class Application < Sinatra::Base
     else
       return erb(:signup_fail)
     end
+  end
+
+  post "/login" do
+    email = params[:email]
+    password = params[:password]
+
+    repo = UserRepository.new
+    user = repo.find_by_email(email)
+
+    if repo.find_by_email(email) == nil || user.password != password
+      return erb(:login_fail)
+    else
+      session[:user_id] = user.id
+      return erb(:login_success)
+    end
+  end
+
+  get "/account_page" do
+    return "hello"
   end
 end
 

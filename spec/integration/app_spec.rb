@@ -63,4 +63,31 @@ describe Application do
         expect(repo.all.length).to eq 3
       end
     end
+
+    context 'POST /login' do
+      it "returns 200 OK and gives you link to go to your account page" do
+        response = post('/login', email: "email1@example.com", password: "pass_1") 
+        
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Correct login info!</h1>')
+        expect(response.body).to include('<a href="/account_page">Click here to go to your personal MakersBnB account!</a>')
+      end
+
+      it "returns 200 OK and give you an error message when password is wrong and link back to login" do
+        response = post('/login', email: "email1@example.com", password: "medmed")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Incorrect login info</h1>')
+        expect(response.body).to include('<a href="/login">Click here to login again</a>')
+        expect(response.body).to include('<a href="/">Click here to go back to the homepage</a>')
+      end
+
+      it "return 200 ok and gives an error message when the email doesn't exist" do
+        response = post('/login', email: "hello@email.com", password: "pass")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<a href="/login">Click here to login again</a>')
+        expect(response.body).to include('<a href="/">Click here to go back to the homepage</a>')
+      end
+    end
 end
