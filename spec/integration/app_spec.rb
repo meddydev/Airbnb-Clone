@@ -90,4 +90,19 @@ describe Application do
         expect(response.body).to include('<a href="/">Click here to go back to the homepage</a>')
       end
     end
+
+    context 'GET to /account_page' do
+      it "returns 200 ok and welcomes you to you account page, gives a link to add a new space and shows you a list of spaces" do
+        login = post('/login', email: "email1@example.com", password: "pass_1")
+        response = get('/account_page')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Welcome to your MakersBnB account</h1>')
+        expect(response.body).to include('<a href="/add_space">Click here to add a new space</a>')
+        expect(response.body).to include('<a href="/spaces/1">title_1</a>')
+        expect(response.body).to include('<p>description1</p>')
+        expect(response.body).to include('<a href="/spaces/2">title_2</a>')
+        expect(response.body).to include('<p>description2</p>')
+      end
+    end
 end

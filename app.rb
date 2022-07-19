@@ -45,18 +45,34 @@ class Application < Sinatra::Base
     password = params[:password]
 
     repo = UserRepository.new
-    user = repo.find_by_email(email)
+    @user = repo.find_by_email(email)
 
-    if repo.find_by_email(email) == nil || user.password != password
+    if repo.find_by_email(email) == nil || @user.password != password
       return erb(:login_fail)
     else
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       return erb(:login_success)
     end
   end
 
   get "/account_page" do
-    return "hello"
+    if session[:user_id] == nil
+      return redirect('/login')
+    else
+      repo_user = UserRepository.new
+      @user = repo_user.find(session[:user_id])
+      repo_space = SpaceRepository.new
+      @spaces = repo_space.all
+      return erb(:account_page)
+    end
+  end
+
+  get "/add_space" do
+   return "hello"
+  end
+
+  get "/space/:id" do
+    # id = params[:id]
   end
 end
 

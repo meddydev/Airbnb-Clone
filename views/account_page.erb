@@ -1,0 +1,8 @@
+<h1>Welcome to your MakersBnB account</h1>
+
+<h2><a href="/add_space">Add a new space</a></h2>
+
+<%@spaces.each do |space|%>
+  <br> <a href="/spaces/<%=space.id%>"><%=space.title%></a>
+   <p><%=space.description%></p>
+<%end%>

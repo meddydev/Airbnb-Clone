@@ -12,6 +12,20 @@ class UserRepository
     users
   end
 
+  def find(id)
+    query = "SELECT * FROM users WHERE id = $1;"
+    params = [id]
+
+    result_set = DatabaseConnection.exec_params(query, params)
+    if result_set.to_a.empty?
+      return nil
+    else
+      record = result_set[0]
+      record_to_user_object(record)
+    end
+  end
+
+  
   def find_by_email(email)
     query = "SELECT * FROM users WHERE email = $1;"
     params = [email]
