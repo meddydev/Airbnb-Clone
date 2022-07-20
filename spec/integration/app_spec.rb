@@ -117,6 +117,8 @@ describe Application do
         expect(response.body).to include('2022-09-05')
         expect(response.body).to include('2022-10-05')
         expect(response.body).to include('name_3')
+        expect(response.body).to include("/new_request/3")
+        expect(response.body).to include('Request this space')
       end
     end
 
@@ -151,6 +153,19 @@ describe Application do
         expect(spaces.last.price_per_night).to eq('$89.00')
         expect(spaces.last.available_from_date).to eq("2022-10-07")
         expect(spaces.last.owner_id).to eq("1")
+      end
+
+      context 'POST /spaces/space.id/new_request' do
+        it "send the request to the owner" do 
+          login = post('/login', email: "email1@example.com", password: "pass_1")
+          response = post('new_request/3', confirmed: "FALSE", from_date:"2022-07-23", to_date:"2022-07-25", requester_id: 1, space_id: 3)
+          repo = BookingRepository.new
+          expect(response.status).to eq(302)
+          bookings = repo.all
+
+          expect(bookings.length).to eq 4
+          expect(bookings.last.confirmed).to eq "f"
+        end
       end
     end
 end
