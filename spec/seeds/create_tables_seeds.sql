@@ -16,4 +16,15 @@ CREATE TABLE spaces (
   constraint fk_owner foreign key(owner_id) references users(id)
 );
 
+CREATE TABLE bookings (
+  id SERIAL PRIMARY KEY,
+  confirmed boolean,
+  from_date date,
+  to_date date,
+  requester_id int,
+  space_id int,
+  constraint fk_space foreign key(space_id) references spaces(id),
+  constraint fk_requester foreign key(requester_id) references users(id)
+);
+
 -- YYYY-MM-DD
