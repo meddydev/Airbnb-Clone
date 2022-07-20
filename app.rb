@@ -87,6 +87,7 @@ class Application < Sinatra::Base
       new_space.available_from_date = params[:available_from_date]
       new_space.available_to_date = params[:available_to_date]
       new_space.owner_id = session[:user_id].to_s
+      new_space.image = params[:image]
       
       repo.create(new_space)
       

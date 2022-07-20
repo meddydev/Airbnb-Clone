@@ -2,7 +2,7 @@
     <ul>
         <li><a href="/account_page"> Account </a></li>
         <li><a href=""> Requests</a></li>
-        <li><a href="/">Logout/a></li>
+        <li><a href="/">Logout</a></li>
     </ul>
 </nav>
 
@@ -14,6 +14,7 @@
     <br> Price per night: <input type="number" step=".01" name="price_per_night">
     <br> Available from: <input type="date" name="available_from_date">
     <br> Available to: <input type="date" name="available_to_date">
+    <br> Image<input type="file" id="myFile" name="image">
     # <input type="hidden" name="owner_id" value="<%=@user_id%>">
     <br><br><input type="submit" value="List my space!">
 </form>

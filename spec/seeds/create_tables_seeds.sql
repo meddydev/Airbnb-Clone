@@ -12,6 +12,7 @@ CREATE TABLE spaces (
   price_per_night money,
   available_from_date date,
   available_to_date date,
+  image bytea,
   owner_id int,
   constraint fk_owner foreign key(owner_id) references users(id)
 );

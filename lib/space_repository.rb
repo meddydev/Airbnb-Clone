@@ -23,8 +23,8 @@ class SpaceRepository
     end
 
     def create(space)
-        query = "INSERT INTO spaces (title, description, price_per_night, available_from_date, available_to_date, owner_id) VALUES ($1, $2, $3, $4, $5, $6);"
-        params = [space.title, space.description, space.price_per_night, space.available_from_date, space.available_to_date, space.owner_id]
+        query = "INSERT INTO spaces (title, description, price_per_night, available_from_date, available_to_date, owner_id, image) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+        params = [space.title, space.description, space.price_per_night, space.available_from_date, space.available_to_date, space.owner_id, space.image]
 
         DatabaseConnection.exec_params(query, params)
     end
