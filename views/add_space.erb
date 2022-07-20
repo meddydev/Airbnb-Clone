@@ -1,0 +1,19 @@
+<nav>
+    <ul>
+        <li><a href="/account_page"> Account </a></li>
+        <li><a href=""> Requests</a></li>
+        <li><a href="/">Logout/a></li>
+    </ul>
+</nav>
+
+<h1>List your space!</h1>
+
+<form action="/add_space" method="POST">
+    <br>Title: <input type="text" name="title">
+    <br>Description: <input type="text" name="description">
+    <br> Price per night: <input type="number" step=".01" name="price_per_night">
+    <br> Available from: <input type="date" name="available_from_date">
+    <br> Available to: <input type="date" name="available_to_date">
+    # <input type="hidden" name="owner_id" value="<%=@user_id%>">
+    <br><br><input type="submit" value="List my space!">
+</form>

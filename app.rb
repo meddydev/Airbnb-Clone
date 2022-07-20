@@ -16,6 +16,9 @@ class Application < Sinatra::Base
   enable :sessions
   
   get "/" do
+    if session[:user_id] != nil
+      session.delete(:user_id)
+    end
     return erb(:index)
   end
 
@@ -68,13 +71,36 @@ class Application < Sinatra::Base
   end
 
   get "/add_space" do
-   return "hello"
+   return erb(:add_space)
+  end
+
+  post "/add_space" do
+    if session[:user_id] == nil
+      return redirect('/login')
+    else
+      @user_id = session[:user_id]
+      repo = SpaceRepository.new
+      new_space = Space.new
+      new_space.title = params[:title]
+      new_space.description = params[:description]
+      new_space.price_per_night = params[:price_per_night]
+      new_space.available_from_date = params[:available_from_date]
+      new_space.available_to_date = params[:available_to_date]
+      new_space.owner_id = session[:user_id].to_s
+      
+      repo.create(new_space)
+      
+      return redirect('/account_page')
+    end
   end
 
   get "/spaces/:id" do
     id = params[:id]
-    repo = SpaceRepository.new
-    @space = repo.find(id)
+    space_repo = SpaceRepository.new
+    @space = space_repo.find(id)
+    repo_user = UserRepository.new
+    @user = repo_user.find(@space.owner_id)
     return erb(:spaces_info)
   end
+
 end
