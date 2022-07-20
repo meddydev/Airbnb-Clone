@@ -38,7 +38,7 @@ Put the different nouns in this table. Replace the example with your own nouns.
 | Record                | Properties          |
 | --------------------- | ------------------  |
 | User                  | id, name, email, password
-|                       | 
+| Bookings              | id, confirmed, owner_id, requester_id, space_id, dates
 
 1. Name of the first table (always plural): `albums` 
 
@@ -117,17 +117,18 @@ CREATE TABLE users (
   password text
 );
 
--- Then the table with the foreign key first.
-CREATE TABLE albums (
+CREATE TABLE bookings (
   id SERIAL PRIMARY KEY,
-  title text,
-  release_year int,
--- The foreign key name is always {other_table_singular}_id
-  artist_id int,
-  constraint fk_artist foreign key(artist_id)
-    references artists(id)
-    on delete cascade
+  confirmed boolean,
+  from_date date,
+  to_date date,
+  requester_id int,
+  constraint fk_requester foreign key(requester_id) references users(id)
+  space_id int,
+  constraint fk_space foreign key(space_id) references spaces(id)
 );
+
+
 
 ```
 
