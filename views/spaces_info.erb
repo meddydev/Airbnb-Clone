@@ -1,0 +1,18 @@
+<nav>
+    <ul>
+        <li><a href="/account_page"> Account </a></li>
+        <li><a href=""> Requests</a></li>
+        <li><a href="/">Logout/a></li>
+    </ul>
+</nav>
+
+<h2><%=@space.title%></h2>
+<h3>Owner: <%=@user.name%></h3>
+<div>
+    <p>
+        <br><br><%=@space.description%>
+        <br><br>Price: <%=@space.price_per_night%>
+        <br><br>Available from: <%=@space.available_from_date%>
+        <br><br>Until: <%=@space.available_to_date%>
+    </p>
+</div>

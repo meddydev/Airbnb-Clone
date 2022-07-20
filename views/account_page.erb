@@ -1,0 +1,15 @@
+<nav>
+  <ul>
+    <li><a href="/account_page"> Account</a></li>
+    <li><a href=""> Requests</a></li>
+    <li><a href="/">Logout/a></li>
+  </ul>
+</nav>
+<h1>Welcome to your MakersBnB account</h1>
+
+<h2><a href="/add_space">Add a new space</a></h2>
+
+<%@spaces.reverse.each do |space|%>
+  <br> <a href="/spaces/<%=space.id%>"><%=space.title%></a>
+   <p><%=space.description%></p>
+<%end%>

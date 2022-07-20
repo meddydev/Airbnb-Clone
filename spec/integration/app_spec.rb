@@ -24,7 +24,7 @@ describe Application do
             expect(response.body).to include("<h1>Welcome to MakersBnB</h1>")
             expect(response.body).to include('<form action="/signup" method="POST">')
             expect(response.body).to include('input type="text" name="name"')
-            expect(response.body).to include('input type="text" name="email"')
+            expect(response.body).to include('input type="email" name="email"')
             expect(response.body).to include('input type="password" name="password"')
             expect(response.body).to include('<a href="/login"> I already have an account </a>')
         end
@@ -36,7 +36,7 @@ describe Application do
             expect(response.status).to eq(200)
             expect(response.body).to include('<h1>Login to your account</h1>')
             expect(response.body).to include('<form action="/login" method="POST">')
-            expect(response.body).to include('input type="text" name="email"')
+            expect(response.body).to include('input type="email" name="email"')
             expect(response.body).to include('input type="password" name="password"')
         end
     end
@@ -88,6 +88,69 @@ describe Application do
         expect(response.status).to eq(200)
         expect(response.body).to include('<a href="/login">Click here to login again</a>')
         expect(response.body).to include('<a href="/">Click here to go back to the homepage</a>')
+      end
+    end
+
+    context 'GET to /account_page' do
+      it "returns 200 ok and welcomes you to you account page, gives a link to add a new space and shows you a list of spaces" do
+        login = post('/login', email: "email1@example.com", password: "pass_1")
+        response = get('/account_page')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Welcome to your MakersBnB account</h1>')
+        expect(response.body).to include('<a href="/add_space">Add a new space</a>')
+        expect(response.body).to include('<a href="/spaces/1">title_1</a>')
+        expect(response.body).to include('<p>description1</p>')
+        expect(response.body).to include('<a href="/spaces/2">title_2</a>')
+        expect(response.body).to include('<p>description2</p>')
+      end
+    end
+
+    context 'GET /spaces/:id' do
+      it "returns 200 OK with relevant information associated with the space" do
+        response = get('/spaces/3')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('title_3')
+        expect(response.body).to include('description3')
+        expect(response.body).to include('30')
+        expect(response.body).to include('2022-09-05')
+        expect(response.body).to include('2022-10-05')
+        expect(response.body).to include('name_3')
+      end
+    end
+
+    context 'GET /add_space' do
+      it "returns 200 OK with an HTML form to list a new space" do
+        response = get('/add_space')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('List your space!')
+        expect(response.body).to include('<form action="/add_space" method="POST">')
+        expect(response.body).to include('input type="text" name="title"')
+        expect(response.body).to include('input type="text" name="description"')
+        expect(response.body).to include('input type="number" step=".01" name="price_per_night"')
+        expect(response.body).to include('input type="date" name="available_from_date"')
+        expect(response.body).to include('input type="date" name="available_to_date"')
+        expect(response.body).to include('input type="hidden" name="owner_id"')
+      end
+    end
+
+    context 'POST /add_space' do
+      it "returns 302 OK and adds space to database" do
+        login = post('/login', email: "email1@example.com", password: "pass_1")
+        response = post('/add_space', title: "Bob's house", description: "really nice house", price_per_night: 89, available_from_date: "2022-10-07", available_to_date: "2022-10-12", owner_id: 1)
+        repo = SpaceRepository.new
+        spaces = repo.all
+
+
+        expect(response.status).to eq(302)
+        expect(spaces.length).to eq(4)
+        expect(spaces.last.id).to eq(4)
+        expect(spaces.last.title).to eq("Bob's house")
+        expect(spaces.last.price_per_night).to eq('$89.00')
+        expect(spaces.last.available_from_date).to eq("2022-10-07")
+        expect(spaces.last.owner_id).to eq("1")
       end
     end
 end
