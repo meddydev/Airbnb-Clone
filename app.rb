@@ -10,7 +10,7 @@ class Application < Sinatra::Base
   # This allows the app code to refresh
   # without having to restart the server.
   configure :development do
-    register Sinatra::Reloader
+    register Sinatra::Reloader 
   end
 
   enable :sessions
@@ -71,8 +71,10 @@ class Application < Sinatra::Base
    return "hello"
   end
 
-  get "/space/:id" do
-    # id = params[:id]
+  get "/spaces/:id" do
+    id = params[:id]
+    repo = SpaceRepository.new
+    @space = repo.find(id)
+    return erb(:spaces_info)
   end
 end
-

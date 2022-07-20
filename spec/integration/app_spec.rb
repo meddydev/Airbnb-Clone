@@ -98,11 +98,24 @@ describe Application do
 
         expect(response.status).to eq(200)
         expect(response.body).to include('<h1>Welcome to your MakersBnB account</h1>')
-        expect(response.body).to include('<a href="/add_space">Click here to add a new space</a>')
+        expect(response.body).to include('<a href="/add_space">Add a new space</a>')
         expect(response.body).to include('<a href="/spaces/1">title_1</a>')
         expect(response.body).to include('<p>description1</p>')
         expect(response.body).to include('<a href="/spaces/2">title_2</a>')
         expect(response.body).to include('<p>description2</p>')
+      end
+    end
+
+    context 'GET /spaces/:id' do
+      it "returns 200 OK with relevant information associated with the space" do
+        response = get('/spaces/3')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('title_3')
+        expect(response.body).to include('description3')
+        expect(response.body).to include('30')
+        expect(response.body).to include('2022-09-05')
+        expect(response.body).to include('2022-10-05')
       end
     end
 end
