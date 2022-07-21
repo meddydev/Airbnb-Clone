@@ -57,5 +57,4 @@ describe BookingRepository do
     expect(new_booking.to_date).to eq "2023-01-01"
     expect(new_booking.from_date).to eq "2022-08-05"
   end
-
 end

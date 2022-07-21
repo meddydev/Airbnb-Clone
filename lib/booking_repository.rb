@@ -30,8 +30,8 @@ class BookingRepository
     end
 
     def update(booking)
-        query = "UPDATE bookings SET confirmed = $1, from_date = $2, to_date = $3, requester_id = $4, space_id = $5;"
-        params = [booking.confirmed, booking.from_date, booking.to_date, booking.requester_id, booking.space_id]
+        query = "UPDATE bookings SET confirmed = $1, from_date = $2, to_date = $3, requester_id = $4, space_id = $5 WHERE id = $6;"
+        params = [booking.confirmed, booking.from_date, booking.to_date, booking.requester_id, booking.space_id, booking.id]
 
         DatabaseConnection.exec_params(query, params)
     end

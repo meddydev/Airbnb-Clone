@@ -1,0 +1,44 @@
+<nav>
+  <ul>
+    <li><a href="/account_page"> Account</a></li>
+    <li><a href="/account_page/requests"> Requests</a></li>
+    <li><a href="/">Logout</a></li>
+  </ul>
+</nav>
+<h1>REQUESTS YOU HAVE MADE</h1>
+<% @bookings.reverse.each do |booking| %>
+    <% if booking.requester_id == @user.id %>
+        <% if booking.confirmed == "f" %>
+            <br>Request pending
+        <% else %>
+            <br>Request approved!
+        <% end %>
+        
+        <br>From: <%= booking.from_date %>
+        <br>To: <%= booking.to_date %>
+        <br><%= @space_repo.find(booking.space_id).title %>
+        <br><%= @space_repo.find(booking.space_id).description %>
+
+        <br><%= @user_repo.find((@space_repo.find(booking.space_id).owner_id)).name %>
+    <% end %>
+<% end %>
+
+<h1>BOOKINGS FOR YOUR SPACES</h1>
+<% @bookings.reverse.each do |booking| %>
+    <% if @space_repo.find((booking.space_id.to_i)).owner_id.to_i == @user.id.to_i %>
+        <% if booking.confirmed == "f" %>
+                    <form action="/update/<%=booking.id%>" method="POST">
+                    <input type="submit" value="Approve now">
+                    </form>
+            <% else %>
+                    <br>Request approved!
+            <% end %>
+            
+            <br><br>From: <%= booking.from_date %>
+            <br>To: <%= booking.to_date %>
+            <br><%= @space_repo.find(booking.space_id).title %>
+            <br><%= @space_repo.find(booking.space_id).description %>
+
+            <br><%= @user_repo.find(booking.requester_id).name %>
+        <% end %>
+<% end %>

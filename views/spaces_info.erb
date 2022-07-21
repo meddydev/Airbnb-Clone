@@ -2,7 +2,7 @@
     <ul>
         <li><a href="/account_page"> Account </a></li>
         <li><a href=""> Requests</a></li>
-        <li><a href="/">Logout/a></li>
+        <li><a href="/">Logout</a></li>
     </ul>
 </nav>
 
@@ -16,3 +16,15 @@
         <br><br>Until: <%=@space.available_to_date%>
     </p>
 </div>
+<h2>Request this space</h2>
+<form method= "POST" action= "/new_request/<%=@space.id%>">
+<label>DATES</label>
+
+<br> <label>Check in</label>
+<input type=date name="from_date" />
+<label>Check out</label>
+<input type=date name="to_date" />
+<input type= "submit" name= "request" />
+<input type="hidden" name="space_id" value="<%=@space.id%>" />
+<input type="hidden" name="confirmed" value="FALSE" />
+</form>
