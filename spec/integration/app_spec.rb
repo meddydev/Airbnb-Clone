@@ -168,4 +168,35 @@ describe Application do
         end
       end
     end
+
+    context "GET /account_page/requests" do
+      it "shows requests I've made for other spaces" do
+        login = post('/login', email: "email1@example.com", password: "pass_1")
+        new_request = post('new_request/3', confirmed: "FALSE", from_date:"2022-07-23", to_date:"2022-07-25", requester_id: 1, space_id: 3)
+        response = get("/account_page/requests")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include("REQUESTS YOU HAVE MADE")
+        expect(response.body).to include("Request pending")
+        expect(response.body).to include("2022-07-23")
+        expect(response.body).to include("2022-07-25")
+        expect(response.body).to include("title_3")
+        expect(response.body).to include("description3")
+        expect(response.body).to include("name_3")
+      end
+    end
+
+    it "shows requests for my listed spaces" do
+      login = post('/login', email: "email1@example.com", password: "pass_1")
+      response = get("/account_page/requests")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("BOOKINGS FOR YOUR SPACES")
+      expect(response.body).to include("Approval pending")
+      expect(response.body).to include("title_2")
+      expect(response.body).to include("description2")
+      expect(response.body).to include("name_3")
+      expect(response.body).to include("2022-08-05")
+      expect(response.body).to include("2022-09-05")
+    end
 end

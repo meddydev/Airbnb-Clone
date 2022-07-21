@@ -123,6 +123,33 @@ class Application < Sinatra::Base
   end
 
   get "/account_page/requests" do
-    return "banana"
+    if session[:user_id] == nil
+      return redirect('/login')
+    # Requester view
+    elsif
+      @booking_repo = BookingRepository.new
+      @bookings = @booking_repo.all
+      @user_repo = UserRepository.new
+      @user = @user_repo.find(session[:user_id])
+      @space_repo = SpaceRepository.new
+      # @spaces = @space_repo.all
+      return erb(:requests)
+    end
+    # Owner view
+
+    # Different user
   end
 end
+
+# <% if booking.confirmed == "f" %>
+#                 <br>Approval pending
+#             <% else %>
+#                 <br>Request approved!
+#             <% end %>
+        
+#         <br>From: <%= booking.from_date %>
+#         <br>To: <%= booking.to_date %>
+#         <br><%= @space_repo.find(booking.space_id).title %>
+#         <br><%= @space_repo.find(booking.space_id).description %>
+
+#         <br><%= @user_repo.find(booking.requester_id).name %>
