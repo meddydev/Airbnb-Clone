@@ -125,7 +125,6 @@ class Application < Sinatra::Base
   get "/account_page/requests" do
     if session[:user_id] == nil
       return redirect('/login')
-    # Requester view
     elsif
       @booking_repo = BookingRepository.new
       @bookings = @booking_repo.all
@@ -135,21 +134,18 @@ class Application < Sinatra::Base
       # @spaces = @space_repo.all
       return erb(:requests)
     end
-    # Owner view
+  end
 
-    # Different user
+  post "/update/:id" do
+    if session[:user_id] == nil
+      return redirect('/login')
+    else
+      repo = BookingRepository.new
+      id = params[:id]
+      booking = repo.find(id)
+      booking.confirmed = 'TRUE'
+      repo.update(booking)
+      return redirect('/account_page/requests')
+    end
   end
 end
-
-# <% if booking.confirmed == "f" %>
-#                 <br>Approval pending
-#             <% else %>
-#                 <br>Request approved!
-#             <% end %>
-        
-#         <br>From: <%= booking.from_date %>
-#         <br>To: <%= booking.to_date %>
-#         <br><%= @space_repo.find(booking.space_id).title %>
-#         <br><%= @space_repo.find(booking.space_id).description %>
-
-#         <br><%= @user_repo.find(booking.requester_id).name %>

@@ -192,11 +192,11 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("BOOKINGS FOR YOUR SPACES")
-      expect(response.body).to include("Approval pending")
       expect(response.body).to include("title_2")
       expect(response.body).to include("description2")
       expect(response.body).to include("name_3")
       expect(response.body).to include("2022-08-05")
       expect(response.body).to include("2022-09-05")
+      expect(response.body).to include('<form action="/update/2" method="POST">')
     end
 end
