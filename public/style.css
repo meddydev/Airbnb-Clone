@@ -1,76 +1,88 @@
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-    color: red;
-  }
-  #header-logo {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .navbar {
-    background-color: white;
-  }
-  nav {
-    background-color: white;
-    display: flex;
-  
-    justify-content: space-evenly;
-    padding: 0px;
-  }
-  
-  ul {
-    list-style: none;
-    margin-left: 50px;
-  }
-  
-  li {
-    display: inline;
-    padding: 50px;
-    margin: left 50px;
-  }
-  
-  #accountpagetitle {
-    background-image: url("./images/Welcome\ to\ your\ MakersBnB\ account.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 600px;
-  }
-  #title {
-    background-color: white;
-  }
-  
-  #addspacesbutton { 
-    text-align: center;
-    display: inline;
-    margin: 0 auto;
-  }
+  color: red;
+}
+#header-logo {
+  padding: 0;
+  margin: 0;
+}
 
-  #spacelist {
-    border: 30px;
-   
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-  }
+.navbar {
+  background-color: white;
+}
+nav {
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
 
-  #newspacebutton {
-    border: 30px;
-   
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 20px;
-    text-decoration: none;
-    color: ;
-  }
+  padding: 0px;
+}
 
+ul {
+  list-style: none;
+  margin-left: 50px;
+}
 
+li {
+  display: inline;
+  padding: 50px;
+  margin: left 50px;
+}
+
+#accountpagetitle {
+  background-image: url("./images/Welcome\ to\ your\ MakersBnB\ account.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+}
+#title {
+  background-color: white;
+}
+
+#addspacesbutton {
+  text-align: center;
+  display: inline;
+  margin: 0 auto;
+}
+
+#spacelist {
+  border: 30px;
+
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#ccountpagespaceslist {
+  border: 10px;
+  display: inline;
+}
+
+#newspacebutton {
+  border: 30px;
+
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: ;
+}
 
 #spacerequests {
+  padding: 5px;
+  border: 1px;
+  border-radius: 15px;
+  display: 50%;
+  margin: 5px;
+  margin-left: 10px;
+}
+
+#bookings {
   padding: 10px;
   border: 1px;
   border-radius: 15px;
@@ -79,19 +91,16 @@ h1 {
   margin-left: 10px;
 }
 
-#bookings{
-  padding: 10px;
-  border: 1px;
-  border-radius: 15px;
-  display: 50%;
-  margin: 10px;
-  margin-left: 10px;
-}
-
-footer{
+footer {
   background-image: url("./images/winter_cottage.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 600px;
+}
+#addspace {
+  margin-left: 40px;
+  padding-left: 50px;
+  display: flexbox;
+  margin: 0 auto;
 }

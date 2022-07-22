@@ -8,7 +8,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"><img id = "header-logo" src="/images/makersbnb.png" alt= "logo" width="150" height="120"></a>
+          <a class="navbar-brand" href="/account_page"><img id = "header-logo" src="/images/makersbnb.png" alt= "logo" width="150" height="120"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -18,7 +18,7 @@
               <a class="nav-link" href="/account_page">Account <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/account_page/requests">Request</a>
+              <a class="nav-link" href="/account_page/requests">Requests</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="/">Logout</a>
@@ -27,19 +27,21 @@
           </ul>
           </div>
         </nav>
-        <h1>REQUESTS YOU HAVE MADE</h1>
-
         
+
+  <div class="container">
+     <div class="row align-items-start">
+      <div class="col-6">
+      <h1>REQUESTS YOU HAVE MADE</h1>
         <% @bookings.reverse.each do |booking| %>
             <div id="spacerequests">
             <% if booking.requester_id == @user.id %>
                 <% if booking.confirmed == "f" %>
-                    <br><h5>Request pending</h5>
+                    <h5>Request pending</h5>
                 <% else %>
                     <h5>Request approved!</h5>
                 <% end %>
-                
-                <br><%= @space_repo.find(booking.space_id).title %>
+                <%= @space_repo.find(booking.space_id).title %>
                 <br>Description: <%= @space_repo.find(booking.space_id).description %>
                 <br>Owner name: <%= @user_repo.find((@space_repo.find(booking.space_id).owner_id)).name %>
                 <br>From: <%= booking.from_date %>
@@ -48,6 +50,10 @@
             <% end %>
             </div>
         <% end %>
+      
+    </div>
+
+      <div class="col-6"> 
        
         <h1>BOOKINGS FOR YOUR SPACES</h1>
         <% @bookings.reverse.each do |booking| %>
@@ -71,5 +77,7 @@
                 <% end %>
             </div>
         <% end %>
+        </div>
+      </div>
     </body>
 </html>       

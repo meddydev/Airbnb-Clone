@@ -7,18 +7,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"><img id = "header-logo" src="/images/makersbnb.png" alt= "logo" width="150" height="120"></a>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/account_page"><img id = "header-logo" src="/images/makersbnb.png" alt= "logo" width="150" height="120"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Account <span class="sr-only"></span></a>
+              <a class="nav-link" href="/account_page">Account <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/account_page/requests">Request</a>
+              <a class="nav-link" href="/account_page/requests">Requests</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="/">Logout</a>
@@ -27,6 +28,8 @@
           </ul>
           </div>
         </nav>
+    </header>
+        
 
     <div class="title-container" id="accountpagetitle">
         <%# <h1 id="title" >Welcome to your MakersBnB account</h1> %>
@@ -34,12 +37,19 @@
     <div id="newspacebutton">
       <button type="button" class="btn btn-outline-danger" id="addspacesbutton"><a href="/add_space">Add a new space</a></button>
     </div>
-    
-    <div class="spacelist" id="spacelist">
-        <%@spaces.reverse.each do |space|%>
-          <br> <a href="/spaces/<%=space.id%>"><%=space.title%></a>
-          <p><%=space.description%></p>
-        <%end%>
+
+  <div class="container" id="accountpagespaceslist">
+     <div class="row jusitfy-content-evenly">
+        
+            <div class="spacelist" id="spacelist">
+               <%@spaces.reverse.each do |space|%>
+                <div class="w-100">  
+                <a href="/spaces/<%=space.id%>"><%=space.title%></a>
+                <p><%=space.description%></p>
+                <%end%>
+                </div>
+              </div>   
+      </div>
     </div>
       
    </body>
