@@ -9,7 +9,7 @@ This project was created by <a href="https://github.com/meddydev"> Ahmed</a>, <a
 
 MakersBnB helps users to list and request spaces to spend their following holidays! 🏖️
 
-## Instalation Instructions:
+## Installation Instructions:
 
 ```
 $ git clone https://github.com/meddydev/Airbnb-Clone
@@ -45,14 +45,6 @@ So that I can request a space
 
 As a user with a listed space, 
 I want to be able to approve requests to stay at my space
-So that I can manage the requests
-
-As a user with a listed space, 
-I want all booked dates to show up as unavailable
-So that I can manage the requests
-
-As a user with a listed space, 
-I want my space to be available to book until I approve a request
 So that I can manage the requests
 
 ````
