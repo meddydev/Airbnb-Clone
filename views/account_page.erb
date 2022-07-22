@@ -18,7 +18,7 @@
               <a class="nav-link" href="#">Account <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/account_page/requests">Request</a>
+              <a class="nav-link" href="/account_page/requests">Requests</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="/">Logout</a>
@@ -34,12 +34,19 @@
     <div id="newspacebutton">
       <button type="button" class="btn btn-outline-danger" id="addspacesbutton"><a href="/add_space">Add a new space</a></button>
     </div>
-    
-    <div class="spacelist" id="spacelist">
-        <%@spaces.reverse.each do |space|%>
-          <br> <a href="/spaces/<%=space.id%>"><%=space.title%></a>
-          <p><%=space.description%></p>
-        <%end%>
+
+  <div class="container" id="accountpagespaceslist">
+     <div class="row jusitfy-content-evenly">
+        
+            <div class="spacelist" id="spacelist">
+               <%@spaces.reverse.each do |space|%>
+                <div class="w-100">  
+                <a href="/spaces/<%=space.id%>"><%=space.title%></a>
+                <p><%=space.description%></p>
+                <%end%>
+                </div>
+              </div>   
+      </div>
     </div>
       
    </body>
